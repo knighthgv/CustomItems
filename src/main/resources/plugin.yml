@@ -1,0 +1,7 @@
+name: CustomItems
+version: ${project.version}
+api-version: 1.18
+main: me.knighthat.plugin.CustomItems
+commands:
+  customitems:
+    aliases: [ csitm ]
