@@ -38,17 +38,6 @@ public class Commands implements CommandExecutor
 		
 		player.getInventory().addItem(item);
 
-		// Xóa phù phép
-		new BukkitRunnable(){
-
-			@Override
-			public void run() {
-
-				 ItemStack inHand = player.getInventory().getItemInMainHand();
-				 inHand.removeEnchantment(Enchantment.DIG_SPEED);
-			}
-		}.runTaskLater(plugin, 20L);
-
 	return true; 
 	}
 	
@@ -60,6 +49,27 @@ public class Commands implements CommandExecutor
 		// Thêm enchantment
 		item.addEnchantment(Enchantment.DIG_SPEED, 5);
 
+		ItemMeta meta = item.getItemMeta();
+
+		// Thêm tên
+		// Video về Component: https://youtu.be/EXEI-fjNse0
+		Component name = Component.text("&cCustom&6Items");
+		meta.displayName(name);
+
+		// Thêm chú thích
+		List<Component> lore = new ArrayList<>();
+		lore.add(Component.newline());
+		lore.add(Component.text(addColor("Đây là dòng thứ 1")));
+		lore.add(Component.newline());
+		lore.add(Component.text(addColor("Đây là dòng thứ 2")));
+
+		item.setItemMeta(meta);
+
 		return item;
+	}
+
+	// Video hướng dẫn tại https://youtu.be/oBBl4Wp522I
+	private @NonNull String addColor(@NonNull String a){
+		return ChatColor.translateAlternateColorCodes('&', a);
 	}
 }
